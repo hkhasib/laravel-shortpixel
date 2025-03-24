@@ -31,27 +31,19 @@ SHORT_PIXEL_API_KEY=secret
 
 ## Usage
 
-You can find all the methods in the original [short-pixel-optimizer/shortpixel-php package](https://github.com/short-pixel-optimizer/shortpixel-php).
+You can find all the methods in the original [short-pixel-optimizer/shortpixel-php package](https://github.com/short-pixel-optimizer/shortpixel-php) and [davidcb/laravel-shortpixel](https://github.com/davidcb/laravel-shortpixel).
 
-Examples:
-```php
-// From URL
-$result = LaravelShortPixel::fromUrls('https://your.site/img/unoptimized.png', '/path/to/save/to'[, 'filename.png', $compression_level = 1, $width = 200, $height = 200, $maxDimension = true]);
-```
+My package is exactly same as David. But, my one automatically generate webp by default. Also, I have added a refresh method.
+
+So, if you want to refresh a previously optimized version of image, you can do it in following way:
 
 ```php
-// From file
-$result = LaravelShortPixel::fromFiles('/path/to/your/local/unoptimized.png', '/path/to/save/to'[, $compression_level = 1, $width = 200, $height = 200, $maxDimension = true]);
-```
+//optimize with refresh
+$result = LaravelShortPixel::fromUrls('https://your.site/img/unoptimized.png', '/path/to/save/to', 'filename.png', $compression_level = 1, $width = 200, $height = 200, $maxDimension = true, $refresh=true]);
 
-```php
-// From files
-$result = LaravelShortPixel::fromFiles(array('/path/to/your/local/unoptimized.png', '/path/to/your/local/unoptimized2.png'), '/path/to/save/to'[, $compression_level = 1, $width = 200, $height = 200, $maxDimension = true]);
 ```
+Just set $refresh = false or ignore it completely as it is false by default if you don't want to refresh.
 
-```php
-// From folder
-$result = LaravelShortPixel::fromFolder('/path/to/your/local/folder', '/path/to/save/to'[, $compression_level = 1, $width = 200, $height = 200, $maxDimension = true]);
-```
+
 
 The compression_level, width, height and maxDimension are optional. Compression levels are 0 - loseless, 1 - lossy, 2- glossy. Default compression level for your images is set on the configuration file (lossy is set as default).
