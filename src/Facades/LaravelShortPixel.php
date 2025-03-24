@@ -1,6 +1,6 @@
 <?php
 
-namespace Davidcb\LaravelShortPixel\Facades;
+namespace Hkhasib\LaravelShortPixel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

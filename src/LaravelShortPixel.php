@@ -1,6 +1,6 @@
 <?php
 
-namespace Davidcb\LaravelShortPixel;
+namespace Hkhasib\LaravelShortPixel;
 
 use ShortPixel;
 
@@ -25,14 +25,14 @@ class LaravelShortPixel
         }
     }
 
-    public function fromUrls($url, $path = null, $filename = null, $level = null, $width = null, $height = null, $max = false)
+    public function fromUrls($url, $path = null, $filename = null, $level = null, $width = null, $height = null, $max = false, $refresh=false)
     {
         if (!$path) {
             $path = config('shortpixel.default_path');
         }
 
         $this->file = ShortPixel\fromUrls($url);
-        return $this->save($path, $filename, $level, $width, $height, $max);
+        return $this->save($path, $filename, $level, $width, $height, $max, $refresh);
     }
 
     public function fromFiles($url, $path = null, $level = null, $width = null, $height = null, $max = false)
@@ -76,7 +76,15 @@ class LaravelShortPixel
         return $this->file->resize($width, $height, $max);
     }
 
-    private function save($path, $filename = null, $level = null, $width = null, $height = null, $max = false)
+    private function refresh(){
+        return $this->file->refresh();
+    }
+
+    private function generateWebp(){
+        return $this->file->generateWebP();
+    }
+
+    private function save($path, $filename = null, $level = null, $width = null, $height = null, $max = false, $refresh=false)
     {
         $this->optimize($level);
 
@@ -84,6 +92,12 @@ class LaravelShortPixel
             $this->resize($width, $height, $max);
         }
 
+        $this->generateWebp();
+
+        if($refresh){
+            $this->refresh();
+        }
         return $this->file->toFiles($path, $filename);
+        
     }
 }

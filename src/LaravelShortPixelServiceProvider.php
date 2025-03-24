@@ -1,6 +1,6 @@
 <?php
 
-namespace Davidcb\LaravelShortPixel;
+namespace Hkhasib\LaravelShortPixel;
 
 use Illuminate\Support\ServiceProvider;
 

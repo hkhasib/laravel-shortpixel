@@ -1,31 +1,27 @@
 # Laravel-Shortpixel
-Laravel 5+ wrapper for ShortPixel API
-
-- [Laravel-Shortpixel on Packagist](https://packagist.org/packages/davidcb/laravel-shortpixel)
-- [Laravel-Shortpixel on GitHub](https://github.com/davidcb/laravel-shortpixel)
-
+Laravel 5+ wrapper for ShortPixel API. A forked version of [davidcb/laravel-shortpixel](https://github.com/davidcb/laravel-shortpixel)
 
 ## Installation
 
 Install via Composer:
 ```
-composer require davidcb/laravel-shortpixel
+composer require hkhasib/laravel-shortpixel
 ```
 
 If you're using Laravel >= 5.5, you can skip this as this package will be auto-discovered.
 Add the service provider to `config/app.php`
 ```php
-Davidcb\LaravelShortPixel\LaravelShortPixelServiceProvider::class,
+Hkhasib\LaravelShortPixel\LaravelShortPixelServiceProvider::class,
 ```
 
 You can register the facade in the `aliases` array in the `config/app.php` file
 ```php
-'LaravelShortPixel' => Davidcb\LaravelShortPixel\Facades\Esendex::class,
+'LaravelShortPixel' => HkhasibLaravelShortPixel\Facades\Esendex::class,
 ```
 
 Publish the config file
 ```
-$ php artisan vendor:publish --provider="Davidcb\LaravelShortPixel\LaravelShortPixelServiceProvider"
+$ php artisan vendor:publish --provider="HkhasibLaravelShortPixel\LaravelShortPixelServiceProvider"
 ```
 
 Set your API key on your .env file
