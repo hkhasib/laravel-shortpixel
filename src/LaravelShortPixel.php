@@ -25,6 +25,20 @@ class LaravelShortPixel
         }
     }
 
+    public function refreshFromUrls($url, $path = null, $filename = null, $level = null, $width = null, $height = null, $max = false, $refresh=true)
+    {
+         $this->fromUrls($url, $path, $filename, $level, $width, $height, $max, $refresh);
+    }
+
+    public function refreshFromFiles($url, $path = null, $level = null, $width = null, $height = null, $max = false, $refresh=true)
+    {
+         $this->fromFiles($url, $path, $level, $width, $height, $max, $refresh);
+    }
+
+    public function refreshFromFolder($folder, $path = null, $level = null, $width = null, $height = null, $max = false, $refresh=true)
+    {
+         $this->fromFolder($folder, $path, $level, $width, $height, $max, $refresh);
+    }
     public function fromUrls($url, $path = null, $filename = null, $level = null, $width = null, $height = null, $max = false, $refresh=false)
     {
         if (!$path) {
@@ -35,7 +49,7 @@ class LaravelShortPixel
         return $this->save($path, $filename, $level, $width, $height, $max, $refresh);
     }
 
-    public function fromFiles($url, $path = null, $level = null, $width = null, $height = null, $max = false)
+    public function fromFiles($url, $path = null, $level = null, $width = null, $height = null, $max = false, $refresh=false)
     {
         if (!$path) {
             $path = config('shortpixel.default_path');
@@ -47,10 +61,10 @@ class LaravelShortPixel
             $this->file = ShortPixel\fromFiles($url);
         }
 
-        return $this->save($path, null, $level, $width, $height, $max);
+        return $this->save($path, null, $level, $width, $height, $max, $refresh);
     }
 
-    public function fromFolder($folder, $path = null, $level = null, $width = null, $height = null, $max = false)
+    public function fromFolder($folder, $path = null, $level = null, $width = null, $height = null, $max = false, $refresh=false)
     {
         \ShortPixel\ShortPixel::setOptions(array("persist_type" => "text"));
 
@@ -59,7 +73,7 @@ class LaravelShortPixel
         }
 
         $this->file = ShortPixel\fromFolder($folder)->wait(300);
-        return $this->save($path, null, $level, $width, $height, $max);
+        return $this->save($path, null, $level, $width, $height, $max, $refresh);
     }
 
     private function optimize($level = null)
