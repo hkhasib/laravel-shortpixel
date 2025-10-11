@@ -14,16 +14,23 @@ class LaravelShortPixel
         'keep_exif'
     ];
 
-    public function __construct()
+    public function __construct(?string $api_key = null)
     {
-        ShortPixel\setKey(config('shortpixel.api_key'));
+        $key = $api_key ?: config('shortpixel.api_key');
+
+        if (!$key) {
+            throw new \InvalidArgumentException('ShortPixel API key is missing.');
+        }
+
+        ShortPixel\setKey($key);
 
         foreach ($this->customizeableConfigs as $config) {
-            if ($value = config('shortpixel.' . $config)) {
-                ShortPixel\ShortPixel::setOptions(array($config => $value));
+            if ($value = config("shortpixel.$config")) {
+                ShortPixel\ShortPixel::setOptions([$config => $value]);
             }
         }
     }
+
 
     public function refreshFromUrls($url, $path = null, $filename = null, $level = null,
                                     $webp=true,$avif=false,
